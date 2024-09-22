@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Teacher List</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #212529; /* Dark background */
+            color: #e9ecef; /* Light text */
+            font-family: 'Arial', sans-serif;
+        }
+        .card {
+            border: none;
+            background-color: #495057; /* Dark card background */
+        }
+        .card-header {
+            background-color: #343a40; /* Dark card header */
+            color: #e9ecef; /* Light card header text */
+        }
+        .table {
+            color: #e9ecef; /* Light text in table */
+        }
+        .table thead {
+            background-color: #343a40; /* Dark background for table header */
+        }
+        .table tbody tr:nth-child(odd) {
+            background-color: #495057; /* Alternating background for table rows */
+        }
+        .table tbody tr:nth-child(even) {
+            background-color: #6c757d; /* Alternating background for table rows */
+        }
+        .btn-success {
+            background-color: #28a745; /* Green button */
+            border: none;
+        }
+        .btn-success:hover {
+            background-color: #218838; /* Dark green button on hover */
+        }
+        .btn-warning {
+            background-color: #ffc107; /* Yellow button */
+            border: none;
+            color: #212529; /* Dark text on yellow button */
+        }
+        .btn-warning:hover {
+            background-color: #e0a800; /* Dark yellow button on hover */
+        }
+        .btn-danger {
+            background-color: #dc3545; /* Red button */
+            border: none;
+        }
+        .btn-danger:hover {
+            background-color: #c82333; /* Dark red button on hover */
+        }
+    </style>
+</head>
+<body>
+<div class="container mt-5">
+    <div class="card shadow-sm">
+        <div class="card-header">
+            <h1 class="h3 mb-0">Teacher List</h1>
+        </div>
+        <div class="card-body">
+            <a class="btn btn-success mb-3" th:href="@{/teachers/new}">Add New Teacher</a>
+            <a class="btn btn-secondary mb-3" th:href="@{/../}">Back</a>
+            <table class="table table-hover table-striped table-bordered text-center">
+                <thead class="thead-dark">
+                <tr>
+                    <th>#</th>
+                    <th>Name</th>
+                    <th>Last Name</th>
+                    <th>Email</th>
+                    <th>Specialization</th>
+                    <th>Classroom</th>
+                    <th>Actions</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="teacher, stat : ${teachers}">
+                    <td th:text="${stat.index + 1}"></td>
+                    <td th:text="${teacher.name}"></td>
+                    <td th:text="${teacher.lastName}"></td>
+                    <td th:text="${teacher.email}"></td>
+                    <td th:text="${teacher.specialization}"></td>
+                    <td th:text="${teacher.classrooms.number}"></td>
+                    <td>
+                        <a class="btn btn-sm btn-warning" th:href="@{/teachers/edit/{id}(id=${teacher.id_teacher})}">Edit</a>
+                        <a class="btn btn-sm btn-danger" th:href="@{/teachers/delete/{id}(id=${teacher.id_teacher})}">Delete</a>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<!-- Bootstrap JS and dependencies -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.0.6/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

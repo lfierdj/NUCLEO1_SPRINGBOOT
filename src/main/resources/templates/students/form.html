@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Student Form</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #212529; /* Dark background */
+            color: #e9ecef; /* Light text */
+            font-family: 'Arial', sans-serif;
+        }
+        .card {
+            border: none;
+            background-color: #495057; /* Dark card background */
+        }
+        .card-header {
+            background-color: #343a40; /* Dark card header */
+            color: #e9ecef; /* Light card header text */
+        }
+        .form-control {
+            background-color: #6c757d; /* Dark form field background */
+            color: #e9ecef; /* Light form field text */
+            border: 1px solid #495057; /* Form field border */
+        }
+        .form-control:focus {
+            border-color: #007bff; /* Form field border color on focus */
+            box-shadow: 0 0 0 0.2rem rgba(38, 143, 255, 0.25); /* Form field shadow on focus */
+        }
+        .btn-primary {
+            background-color: #343a40; /* Dark primary button */
+            border: none;
+            padding: 10px 20px;
+        }
+        .btn-primary:hover {
+            background-color: #495057; /* Dark primary button on hover */
+        }
+        .btn-secondary {
+            background-color: #6c757d; /* Dark secondary button */
+            border: none;
+            padding: 10px 20px;
+        }
+        .btn-secondary:hover {
+            background-color: #5a6268; /* Dark secondary button on hover */
+        }
+    </style>
+</head>
+<body>
+<div class="container mt-5">
+    <div class="card shadow-sm">
+        <div class="card-header">
+            <h1 class="h4 mb-0" th:text="${students.id_students != null} ? 'Edit Student' : 'New Student'">Student Form</h1>
+        </div>
+        <div class="card-body">
+            <form th:action="@{/students}" th:object="${students}" method="post">
+                <input type="hidden" th:field="*{id}" />
+                <div class="form-group">
+                    <label for="firstName">First Name:</label>
+                    <input type="text" th:field="*{firstName}" id="firstName" class="form-control" required />
+                </div>
+                <div class="form-group">
+                    <label for="lastName">Last Name:</label>
+                    <input type="text" th:field="*{lastName}" id="lastName" class="form-control" required />
+                </div>
+                <div class="form-group">
+                    <label for="birthDate">Birth Date:</label>
+                    <input type="date" th:field="*{birthDate}" id="birthDate" class="form-control" required />
+                </div>
+                <div class="form-group">
+                    <label for="email">Email:</label>
+                    <input type="email" th:field="*{email}" id="email" class="form-control" required />
+                </div>
+                <div class="form-group">
+                    <label for="phone">Phone:</label>
+                    <input type="text" th:field="*{phone}" id="phone" class="form-control" required />
+                </div>
+                <button type="submit" class="btn btn-primary">Save</button>
+                <a href="/students" class="btn btn-secondary">Cancel</a> <!-- You can adjust the href as needed -->
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- Bootstrap JS and dependencies -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.0.6/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

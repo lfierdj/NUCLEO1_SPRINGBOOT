@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Teacher Form</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #212529; /* Dark background */
+            color: #e9ecef; /* Light text */
+            font-family: 'Arial', sans-serif;
+        }
+        .card {
+            border: none;
+            background-color: #495057; /* Dark card background */
+        }
+        .card-header {
+            background-color: #343a40; /* Dark card header */
+            color: #e9ecef; /* Light card header text */
+        }
+        .form-control {
+            background-color: #6c757d; /* Dark form field background */
+            color: #e9ecef; /* Light form field text */
+            border: 1px solid #495057; /* Form field border */
+        }
+        .form-control:focus {
+            border-color: #007bff; /* Border color on focus */
+            box-shadow: 0 0 0 0.2rem rgba(38, 143, 255, 0.25); /* Field shadow on focus */
+        }
+        .btn-primary {
+            background-color: #343a40; /* Dark primary button */
+            border: none;
+            padding: 10px 20px;
+        }
+        .btn-primary:hover {
+            background-color: #495057; /* Dark primary button on hover */
+        }
+        .btn-secondary {
+            background-color: #6c757d; /* Dark secondary button */
+            border: none;
+            padding: 10px 20px;
+        }
+        .btn-secondary:hover {
+            background-color: #5a6268; /* Dark secondary button on hover */
+        }
+    </style>
+</head>
+<body>
+<div class="container mt-5">
+    <div class="card shadow-sm">
+        <div class="card-header">
+            <h1 class="h4 mb-0" th:text="${teachers.id_teacher != null} ? 'Edit Teacher' : 'New Teacher'}">Teacher Form</h1>
+        </div>
+        <div class="card-body">
+            <form th:action="@{/teachers}" th:object="${teachers}" method="post">
+                <input type="hidden" th:field="*{id_teacher}" />
+
+                <div class="form-group">
+                    <label for="name">Name:</label>
+                    <input type="text" th:field="*{name}" id="name" class="form-control" required />
+                </div>
+
+                <div class="form-group">
+                    <label for="lastName">Last Name:</label>
+                    <input type="text" th:field="*{lastName}" id="lastName" class="form-control" required />
+                </div>
+
+                <div class="form-group">
+                    <label for="email">Email:</label>
+                    <input type="email" th:field="*{email}" id="email" class="form-control" required />
+                </div>
+
+                <div class="form-group">
+                    <label for="specialization">Specialization:</label>
+                    <input type="text" th:field="*{specialization}" id="specialization" class="form-control" required />
+                </div>
+
+                <div class="form-group">
+                    <label for="assignedClassroom">Assigned Classroom:</label>
+                    <select id="assignedClassroom" class="form-control" th:field="*{classrooms.id_classroom}" required>
+                        <option th:each="classroom : ${classrooms}" th:value="${classroom.id_classroom}" th:text="${classroom.number}">Classroom</option>
+                    </select>
+                </div>
+
+                <button type="submit" class="btn btn-primary">Save</button>
+                <a href="/teachers" class="btn btn-secondary">Cancel</a>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- Bootstrap JS and dependencies -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.0.6/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
